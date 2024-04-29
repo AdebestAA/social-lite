@@ -8,7 +8,7 @@ import { AppContext } from '@/context/AppProvider'
 import dynamic from 'next/dynamic'
 
 const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
-const page = () => {
+const Page= () => {
 
   const router = useRouter()
   const {  handleSignOut,loading,user} = useContext(AppContext)
@@ -50,4 +50,4 @@ if (loading) {
   )
 }
 
-export default page
+export default  Page

@@ -4,7 +4,7 @@ import { PostContext } from '@/context/PostContext'
 
 import React, { useContext} from 'react'
 
-const page = () => {
+const  Page = () => {
 
   const {post,setPost,handlePost} = useContext(PostContext)
   console.log(post);
@@ -40,4 +40,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

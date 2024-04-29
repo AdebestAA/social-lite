@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-const page = () => {
+const Page = () => {
 const router = useRouter()
     const handleRedirect = ()=> {   
            router.push("/")
@@ -18,4 +18,4 @@ const router = useRouter()
   )
 }
 
-export default page
+export default Page

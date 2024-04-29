@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { redirect, useRouter } from 'next/navigation'
 import React, { useContext, useEffect } from 'react'
 
-const page = () => {
+const Page = () => {
     const {searchUser,setSearchUser,handleSearch,usersGotten,handleSearchedUserClicked,setUserMessagToDisplayeID, setChatsUsersInfos, setGetLastMessage, chatsUsersInfos, getLastMessage, getAllMyChats, setGetAllMyChats, userMessageToDisplayID,messagesToDisplay,setUsersGotten,setMessagesToDisplay,clickedUser,message} = useContext(SecondAppContext)
     const {user} = useContext(AppContext)
     const router = useRouter()
@@ -150,4 +150,4 @@ useEffect(() => {
   )
 }
 
-export default page
+export default Page

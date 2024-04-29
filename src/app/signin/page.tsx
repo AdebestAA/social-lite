@@ -5,7 +5,7 @@ import { SecondAppContext } from '@/context/SecondAppProvider'
 import Link from 'next/link'
 import React, { useContext, useEffect } from 'react'
 
-const pages = () => {
+const  Page= () => {
 
     const {userSignIn,setUserSignIn,handleSignIn} = useContext(AppContext)
 // const {showNav,setShowNav} = useContext(SecondAppContext)
@@ -46,4 +46,4 @@ const pages = () => {
   )
 }
 
-export default pages
+export default Page

@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic'
 
   const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
 
-const page = () => {
+const Page = () => {
      const { setUserMessagToDisplayeID, setChatsUsersInfos, setGetLastMessage, chatsUsersInfos, getLastMessage, getAllMyChats, setGetAllMyChats, userMessageToDisplayID,messagesToDisplay,setMessagesToDisplay,clickedUser,message } = useContext(SecondAppContext)
 
   const { user } = useContext(AppContext)
@@ -63,4 +63,4 @@ console.log("this");
   )
 }
 
-export default page
+export default Page

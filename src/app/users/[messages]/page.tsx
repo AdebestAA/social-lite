@@ -8,7 +8,7 @@ import { DocumentData, doc, onSnapshot } from 'firebase/firestore'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect } from 'react'
 
-const page = () => {
+const  Page = () => {
    const {setUserMessagToDisplayeID, setChatsUsersInfos, setGetLastMessage,chatsUsersInfos,getLastMessage,getAllMyChats,setGetAllMyChats,clickedUser,setClickedUser,message,messagesToDisplay,usersGotten,setMessagesToDisplay} = useContext(SecondAppContext)
     const {user} = useContext(AppContext)
     const router = useRouter()
@@ -36,20 +36,20 @@ const page = () => {
     },[message])
 
 
-       useEffect(() => {
+  useEffect(() => {
   let  convertToArrayAndGetMessages= Object.entries(getAllMyChats).find((item, index) => {
-    
-    if (item[0] == usersGotten[0].id + user.uid || item[0] == user.uid + usersGotten[0].id) {
-      return item
-    }
+
+  if (item[0] == usersGotten[0].id + user.uid || item[0] == user.uid + usersGotten[0].id) {
+  return item
+  }
   })as [string,typeGetMessagesAndInfos]
   if (!convertToArrayAndGetMessages) {
-    return
+  return
   }
   const  getMessages =convertToArrayAndGetMessages[1].messages
   // console.log(getMessages);
   setMessagesToDisplay(getMessages)
-      }, [messagesToDisplay,message,getAllMyChats])
+  }, [messagesToDisplay,message,getAllMyChats])
 
   return (
     <div>
@@ -59,4 +59,4 @@ const page = () => {
   )
 }
 
-export default page
+export default  Page

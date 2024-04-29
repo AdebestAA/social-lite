@@ -8,7 +8,7 @@ import Image from 'next/image'
 import React, { useContext, useEffect, useLayoutEffect } from 'react'
 import { FaHeart } from "react-icons/fa";
 
-const page = ({params}:{params:{single:string}}) => {
+const  Page = ({params}:{params:{single:string}}) => {
   
   // console.log(params);
 
@@ -135,4 +135,4 @@ onChange={(e)=> setComment(e.target.value)}
   )
 }
 
-export default page
+export default Page

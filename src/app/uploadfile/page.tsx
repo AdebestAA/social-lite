@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from '@/firebase';
 
-const page = () => {
+const  Page = () => {
     const [file,setFile] = useState<any>(null)
 
     const handleSubmit = (e:React.SyntheticEvent)=>{
@@ -81,4 +81,4 @@ console.log(file);
   )
 }
 
-export default page
+export default Page

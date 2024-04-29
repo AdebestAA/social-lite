@@ -10,7 +10,7 @@ import React, { useContext, useEffect, useLayoutEffect, useRef } from 'react'
 import { IoMdFootball } from "react-icons/io";
 import { FaLaptopCode } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
-const page = ({params}:{params:{room:string}}) => {
+const  Page = ({params}:{params:{room:string}}) => {
     // const pathName = usePathname()
 console.log(params);
 // console.log(pathName);
@@ -130,4 +130,4 @@ behavior:"smooth",
   )
 }
 
-export default page
+export default Page

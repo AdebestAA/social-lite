@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 
 
 const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
-const page = () => {
+const Page = () => {
 
   // const [user,loading,error] = useAuthState(auth)
 const {user,handleSignOut,loading} = useContext(AppContext)
@@ -62,4 +62,4 @@ if (loading) {
   )
 }
 
-export default page
+export default Page
