@@ -1,113 +1,223 @@
+"use client"
+import Navbar from "@/components/navbar";
+import { AppContext } from "@/context/AppProvider";
+import { auth, db } from "@/firebase";
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useContext, useEffect, useState } from "react";
+import SignedIn from "./usersignedin/layout";
+import User from "./usersignedin/page";
+import ComponentsProviders from "@/components/ComponentsProviders";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { PostContext } from "@/context/PostContext";
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+import { FaPlus } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa";
+import { TypePostToRecievd } from "@/types";
+import dynamic from "next/dynamic";
+import Loader from "@/components/Loader";
+
+
+const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
+  
+
+
+
+
 
 export default function Home() {
+  // const [display,setPostToDisplay] = useState([])
+  const {  handleSignOut,loading,user} = useContext(AppContext)
+  const {postToDisplay, handleViewSinglePost,handleLikes, setPostToDisplay} = useContext(PostContext)
+  const [changeState,setChangeState] = useState(true)
+  
+//   const notify = () => toast("not so bad bro!"
+// );
+
+let myDate = new Date((postToDisplay[0]?.date?.seconds  + postToDisplay[0]?.date.nanoseconds/1000000000)* 1000)
+// console.log(myDate.toLocaleDateString());
+const searchParam = useSearchParams()
+// const [user,loading,error] = useAuthState(auth)
+
+
+let id  = "acchijkrs"
+let second = "acejknsu"
+  const router = useRouter()
+const handleGetUserChats = async()=>{
+
+//     const getExistingDocument = await getDoc(doc(db,"user-chats",id))
+
+//     console.log(getExistingDocument.data());
+
+// Add NEW DOC withOUT overwriting the existing ones
+// const washingtonRef = doc(db, "user-chats", id);
+// await updateDoc(washingtonRef, {
+//   anotherName:[
+//     {
+//       name:"blessing",
+//       age:"shame"
+    
+//     }
+//   ]
+// });
+
+
+// Edit existing Doc
+const frankDocRef = doc(db, "user-chats", id);
+// await setDoc(frankDocRef, {
+//     name: "Frank",
+//     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
+//     age: 12
+// });
+
+// To update age and favorite color:
+await updateDoc(frankDocRef, {
+    "chris": [{
+      name:"i changes this",
+      age:"is it working"
+    }]
+});
+    
+}
+
+  const handleGet = async()=>{
+    const getExistingDocument = await getDoc(doc(db,"chats",second))
+
+if (getExistingDocument.exists()) {
+        await setDoc(doc(db, "user-chats", id), {
+       [second]:getExistingDocument?.data()?.messages, 
+    });
+}
+    console.log(getExistingDocument.data());
+    
+  }
+const children = ()=>{
+
+  return <span>show this please</span>
+}
+
+
+useEffect(()=>{
+async function getAllPosts () {
+    
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    console.log(querySnapshot);
+let copyPostToDisplay:TypePostToRecievd[]  = []
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+//         // console.log(doc.id, " => ", doc.data());
+//         console.log(doc.data());
+      copyPostToDisplay =[...copyPostToDisplay,doc.data() as TypePostToRecievd]
+         
+     
+         setPostToDisplay([...copyPostToDisplay])
+        });
+}
+ getAllPosts()
+
+},[changeState,postToDisplay])
+
+if (loading) {
+
+  return <ComponentsProviders>
+     < HydrationLoader/>
+  </ComponentsProviders>
+
+}
+  
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+<ComponentsProviders>
+     <main className="flex flex-col items-center pb-16">
+{ user !== null &&  <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
+<div className="relative w-[50px] h-[50px] rounded-full">
+  <Image src={user?.photoURL} alt="myPhoto" className="rounded-full" fill/>
+</div>
+<h1 className="capitalize">welcome {user?.displayName}</h1>
+      </header>}
+      {/* <button onClick={notify}>Click</button>
+      <ToastContainer position="top-center" 
+      bodyClassName="bg-red-500 w-full"
+     progressClassName="bg-blue-500"
+      /> */}
+      {/* <h1>Post Components</h1>
+<h4>welcome {user?.displayName}</h4>
+ <button 
+className="border-2 border-black my-2 "
+onClick={()=> router.push("./home")}>go to home</button>
+<br />
+<button  onClick={handleSignOut} className="border-2 border-black ">sign out</button>
+<br />
+<button  onClick={()=> router.push("/signup") } className="border-2 border-black my-2 ">sign Up page</button>
+<br />
+<button   onClick={()=> router.push("/signin")} className="border-2 border-black ">sign in page</button>
+<br />
+<button   onClick={handleGet} className="border-2 border-black mt-2">GET</button>
+<br />
+<button   onClick={handleGetUserChats} className="border-2 border-black mt-2">userchats</button> */}
+{/* fixed elements */}
+<button onClick={()=> {
+  
+  if (!user || Object.entries(user).length < 1) {
+    router.push("signup")
+    return
+  }
+  router.push("/post")
+  
+  }} className="bg-green-500 text-black font-bold fixed rounded-full w-[50px] h-[50px] left-[85%] bottom-[10%] flex items-center justify-center hover:text-gray-500 hover:opacity-90 z-40"><FaPlus className="text-2xl" /></button>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+{postToDisplay.map((post,index)=>{
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+return (
+<article 
+key={index} 
+className="border-[1px] border-gray-500 shadow-md my-2 py-2 w-[90%] flex flex-col rounded-md  max-w-[600px]"
+onClick={(e)=> {
+     if (!user) {
+        router.push("signup")
+        return
+    }
+  handleViewSinglePost(e,post.id)
+}}
+>
+  {/* user Display name and Date */}
+  <header className="flex justify-between px-2 w-[90%] mx-auto items-center">
+    <section className="flex items-center">
+  <div className="relative w-[50px] rounded-full h-[40px]">
+ <Image src={post.userImg}  className="rounded-full" fill alt={post.id}/>
+</div>
+    <h2 className="w-[90%] mx-auto capitalize">{post.userDisplayName}</h2>
+    </section>
+    <p>{ new Date((post?.date?.seconds  + post?.date.nanoseconds/1000000000)* 1000).toDateString().slice(0,7)}</p>
+  </header>
+  {/* post text,image...etc */}
+  <div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+<p  className="w-[90%] mx-auto">{post.postText}</p>
+  {/* image section */}
+{post.postImg &&  <div className="relative justify-self-center w-[90%] min-h-[300px] mx-auto rounded-md">
+ <Image src={post.postImg} fill alt={post.id} className="rounded-md"/>
+</div>}
+{/* comments and like */}
+<div className="flex justify-between w-[90%] mx-auto">
+<p className="flex items-center gap-[2px] cursor-pointer" onClick={(e)=>{ 
+   if (!user) {
+        router.push("signup")
+        return
+    }
+  handleLikes(e,post.id)
+  setChangeState((prev)=> !prev)
+  }}>{post.likes.length < 1 ? 0 : post.likes.length} < FaHeart className={post.likes.some((item:{id:string,userImg:string,userName:string}) => item.id === user?.uid) ? "text-green-400" : ""} /></p>
+<p>{post.comments.length < 1 ? "0 comment" : post.comments.length  + "comments"}</p>
+</div>
+  </div>
+</article>
+)
+})}
     </main>
+</ComponentsProviders>
   );
 }

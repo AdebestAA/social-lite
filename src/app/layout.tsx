@@ -1,6 +1,13 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import AppProvider from "@/context/AppProvider";
+import { SecondAppProvider } from "@/context/SecondAppProvider";
+import Navbar from "@/components/navbar";
+import { useState } from "react";
+import { PostProvider } from "@/context/PostContext";
+import GroupChatProvider from "@/context/GroupChatProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +21,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <AppProvider>
+        <SecondAppProvider>
+          <PostProvider>
+            <GroupChatProvider>
+      <body className="bg-black text-gray-300">
+        {children}
+        </body>
+            </GroupChatProvider>
+          </PostProvider>
+        </SecondAppProvider>
+      </AppProvider>
     </html>
   );
 }
