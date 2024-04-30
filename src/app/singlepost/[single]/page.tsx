@@ -72,7 +72,7 @@ const {user} = useContext(AppContext)
 // setSinglePost(getSingleFromLocalStorage)
 //     },[showCommentBox,comment])
     return (
-      <div className='flex flex-col my-2'>
+      <div className='flex flex-col my-2 '>
       {/* first section */}
 <header className='flex text-black font-semibold items-center w-[90%] mx-auto space-x-2'>
 <div className="relative w-[50px] h-[50px] rounded-full ">
@@ -82,9 +82,9 @@ const {user} = useContext(AppContext)
 
 </header>
     {/* second section */}
-<article className=' w-[90%] mx-auto'>
+<article className='w-[90%] mx-auto'>
 <p>{singlePost?.postText}</p>
-{singlePost?.postImg && <div className="relative w-5/5 h-[400px]  mx-auto rounded-md my-2">
+{singlePost?.postImg && <div className="relative w-5/5 h-[400px]  min-h-[500px] sm:h-[500px] md:h-[800px] mx-auto rounded-md my-2">
 <Image className='rounded-md '  src={singlePost?.postImg} fill alt={singlePost?.postText} />
 </div>}
 </article>
