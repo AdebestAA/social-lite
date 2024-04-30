@@ -153,7 +153,7 @@ try {
 const usersRef = collection(db, "users");
 
 const q = query(usersRef, where("name", "==", userSignUp.name.toLowerCase().trim()));
-console.log(q);
+
 
 const querySnapshot = await getDocs(q);
 querySnapshot.forEach((doc) => {
@@ -181,39 +181,22 @@ if (nameFound) {
     const storageRef = ref(storage, userSignUp.image?.name);
     let file  = userSignUp.image
     const uploadTask = uploadBytesResumable(storageRef,  userSignUp.image);
-
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
     uploadTask.on('state_changed', 
     (snapshot) => {
-    // Observe state change events such as progress, pause, and resume
-    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    // console.log('Upload is ' + progress + '% done');
-    // switch (snapshot.state) {
-    // case 'paused':
-    // console.log('Upload is paused');
-    // break;
-    // case 'running':
-    // console.log('Upload is running');
-    // break;
-    // }
+
     }, 
     (error) => {
-    // Handle unsuccessful uploads
+    
     console.log(error);
 
     }, 
     async() => {
-    // Handle successful uploads on complete
-    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+
 
 
     // get the downlaodable URL
     const imageURL = await  getDownloadURL(uploadTask.snapshot.ref)
-    // Add a new document containg the newly sign up user with a generated id
+    
     const userRef = doc(db, "users",userCreated.uid);
     // UPDATING THE USER CREATED object
     const updateUser = await updateProfile(userCreated, {
@@ -226,7 +209,7 @@ if (nameFound) {
     email:userSignUp.email,
     imageURL:imageURL
     })
-console.log(updateUser)
+// console.log(updateUser)
 
 // create user in user-chats
   const userChatsRef = doc(db, "user-chats",userCreated.uid);
@@ -234,40 +217,30 @@ console.log(updateUser)
 
 
     //  console.log('File available at',imageURL);
-    // getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+    // getDownloadURL(uploadTask.snapshot.ref).then(async(downloadURL) => {
     // //   console.log('File available at', downloadURL);
+    //    const updateUser = await updateProfile(userCreated, {
+    // displayName:userSignUp.name, 
+    // photoURL:downloadURL
+    // })
+   
     // });
   }
 )
-
-router.push("/")
+if (typeof window !== "undefined") {
+    router.push("/")
+    
+}
 
 } catch (err:any) {
     console.log(err);
     
- window.alert(err.message.slice(22,err.message.length - 2))
+ window.alert(err.message)
 }
 
 
-
-
-
-// Add a new document with a generated id
-// const newCityRef = doc(collection(db, "cities"));
-
-// await setDoc(newCityRef, userSignUp)
-
 }
 
-
-
-const handleFileChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-
-
-
-
-
-}
   return (
 <AppContext.Provider value={{
     user,
