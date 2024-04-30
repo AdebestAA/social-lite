@@ -7,7 +7,6 @@ import React, { useContext} from 'react'
 const  Page = () => {
 
   const {post,setPost,handlePost} = useContext(PostContext)
-  console.log(post);
 
   
   return (

@@ -1,14 +1,9 @@
 "use client"
 import ComponentsProviders from '@/components/ComponentsProviders'
 import { AppContext } from '@/context/AppProvider'
-import { SecondAppContext } from '@/context/SecondAppProvider'
-import { auth, db } from '@/firebase'
-// import { User } from 'firebase/auth'
-import { doc, onSnapshot } from 'firebase/firestore'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import React, { useContext, useEffect } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import React, { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 
 
@@ -30,11 +25,14 @@ const {user,handleSignOut,loading} = useContext(AppContext)
 // },[])
 
 const router = useRouter()
-
- if (!user || Object.entries(user).length < 1) {
+if (typeof window !== 'undefined') {
+  // Access `location` here
+  // console.log(window.location.href);
+  if (!user || Object.entries(user).length < 1) {
     router.push("signup")
     return
   }
+}
 
  
 

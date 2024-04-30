@@ -6,7 +6,7 @@ import { db } from '@/firebase'
 import { typeGetMessagesAndInfos, typeGottenUsers, typeMessagesFromGetMessagesAndInfo } from '@/types'
 import { DocumentData, doc, onSnapshot } from 'firebase/firestore'
 import Image from 'next/image'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect } from 'react'
 
 const Page = () => {
@@ -39,7 +39,9 @@ const unsub = onSnapshot(doc(db, "user-chats", user.uid), (doc) => {
 
 
 useEffect(() => {
-    
+      if (typeof window !== 'undefined' && window.location) {
+    // Access location if it's available in the browser
+    // console.log(location.pathname);
     if (usersGotten.length > 0) {   
         let  convertToArrayAndGetMessages= Object.entries(getAllMyChats).find((item, index) => {
             
@@ -57,14 +59,19 @@ useEffect(() => {
         console.log(getMessages);
         setMessagesToDisplay(getMessages)
     }
+}
       }, [messagesToDisplay,message,getAllMyChats,usersGotten])
-
-
-
-
- if (!user || Object.entries(user).length < 1) {
-  redirect("signup")
-  }
+      
+      
+      
+      if (typeof window !== 'undefined') {
+  // Access `location` here
+//   console.log(window.location.href);
+  if (!user || Object.entries(user).length < 1) {
+      router.push("signup")
+      return
+    }
+}
 
 
 

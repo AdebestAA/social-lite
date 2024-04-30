@@ -8,8 +8,6 @@ import { useContext } from "react";
 import { AppContext } from "./AppProvider";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { SecondContext, TypeOfMessage, typeGetMessagesAndInfos, typeGottenUsers, typeMessagesFromGetMessagesAndInfo } from "@/types";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Unsubscribe } from "firebase/auth";
 import { v4 as uuid } from "uuid";
 
 
@@ -346,21 +344,21 @@ await updateDoc(doc(db, "user-chats",  usersGotten[0].id), {
 
     const handleSearchedUserClicked = async(userFound:typeGottenUsers)=>{
     const sortNames =( userFound.name + user?.displayName)
-    // console.log(userFound.name,user);
-
-    // check if UsersChats already exists 
+    if (typeof window !== 'undefined' && window.location) {
+    // Access location if it's available in the browser
+    console.log(location.pathname);
+ 
     const q = query(collection(db, "chats"), where("name", "==", userFound.name.toLowerCase()));
-   
-    // const joinAndSortID = userFound.name.length > user?.displayName.length ? userFound.id as string + user.uid : user.uid as string + userFound.id
+
 
           const joinAndSortID = usersGotten[0].id > user?.uid ? usersGotten[0].id + user.uid : user.uid+usersGotten[0].id
-// console.log("jointId",joinAndSortID);
+
 
     const getExistingDocument = await getDoc(doc(db,"chats",joinAndSortID))
 
     if (getExistingDocument.exists()) {
     console.log("document already created");
-    router.push("/users/"+userFound.name)
+    router.push("/users/"+userFound.name || "/users/null")
     setUserMessagToDisplayeID(userFound.id);
     setClickedUser(userFound);
     // console.log(userFound);
@@ -372,7 +370,8 @@ await updateDoc(doc(db, "user-chats",  usersGotten[0].id), {
     messages:[],
     usersInfos:[userFound,{name:user.displayName,imageURL:user.photoURL,id:user.uid,email:user.email}]
     });
-    router.push("/users/"+userFound.name)
+    router.push("/users/"+userFound.name || "/users/null")
+     }
     }
 
 // HANDLESEARCH BTN

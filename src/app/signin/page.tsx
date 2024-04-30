@@ -3,16 +3,12 @@
 import { AppContext } from '@/context/AppProvider'
 import { SecondAppContext } from '@/context/SecondAppProvider'
 import Link from 'next/link'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
 const  Page= () => {
 
     const {userSignIn,setUserSignIn,handleSignIn} = useContext(AppContext)
-// const {showNav,setShowNav} = useContext(SecondAppContext)
 
-//     useEffect(()=>{
-//       setShowNav(false)
-//     },[])
   return (
     <div  className='flex items-center justify-center h-screen'>
     <section className='class-shadow bg-black m-w-[60%] rounded-lg p-4 text-center'>

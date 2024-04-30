@@ -11,13 +11,16 @@ const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
 const Page= () => {
 
   const router = useRouter()
-  const {  handleSignOut,loading,user} = useContext(AppContext)
+  const { loading,user} = useContext(AppContext)
 
-
- if (!user || Object.entries(user).length < 1) {
+if (typeof window !== 'undefined') {
+  // Access `location` here
+  // console.log(window.location.href);
+  if (!user || Object.entries(user).length < 1) {
     router.push("signup")
     return
   }
+}
 
 
 if (loading) {
@@ -37,7 +40,11 @@ if (loading) {
     {groupChatRooms.map((room,index)=>{
         
         return (
-    <section key={index} className='bg-green-400 capitalize my-2 py-2 pl-2 rounded-md text-black font-bold text-md flex items-center space-x-2' onClick={()=> router.push("/groupchat/"+room.link)}>
+    <section key={index} className='bg-green-400 capitalize my-2 py-2 pl-2 rounded-md text-black font-bold text-md flex items-center space-x-2' onClick={()=>{
+       if (typeof window !== 'undefined' && window.location) {
+         router.push("/groupchat/"+room.link || "groupchat/null")
+        }
+    }}>
       <p>{room.icon}</p>
     <p>{room.name}</p>
     </section>

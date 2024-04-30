@@ -7,7 +7,7 @@ import { ReactElement, createContext, useContext, useEffect, useLayoutEffect, us
 import { AppContext } from "./AppProvider";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 const initialContext:TypePostContext =  {
@@ -115,7 +115,7 @@ let copyPostToDisplay:TypePostToRecievd[]  = []
 
 const  handleDeleteComment = async(postId:string|number,comId:string|number)=>{
    if (!user) {
-        redirect("signup")
+        router.push("signup")
     }
 
 const handleCommentRemove = doc(db, "posts", postId as string);
@@ -208,7 +208,7 @@ await updateDoc(handleLike, {
 const handleViewSinglePost = (e: any,id:string | number)=>{
 
    if (!user) {
-        redirect("signup")
+        router.push("signup")
     }
     const findPostFromPostTodisplay= postToDisplay.find(item => item.id === id) as TypePostToRecievd 
 setSinglePost(findPostFromPostTodisplay)

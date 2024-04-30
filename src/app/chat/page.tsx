@@ -9,52 +9,53 @@ import { db } from '@/firebase'
 import { SecondAppContext } from '@/context/SecondAppProvider'
 import { typeGottenUsers, typeMessagesFromGetMessagesAndInfo } from '@/types'
 
-const Home = () => {
- 
+const  Chat    = () => {
+
+
+  
+
+
    const {setUserMessagToDisplayeID, setChatsUsersInfos, setGetLastMessage,chatsUsersInfos,getLastMessage,getAllMyChats,setGetAllMyChats,clickedUser,setClickedUser,message,messagesToDisplay} = useContext(SecondAppContext)
     const {user} = useContext(AppContext)
     const router = useRouter()
 
 
     useEffect(()=>{
+    if (typeof window !== 'undefined') {
+    // Access location if it's available in the browser
+    // console.log(location.pathname);
     const unsub = onSnapshot(doc(db, "user-chats", user?.uid), (doc) => {
-      // console.log("Current data: ", doc.data());
-   console.log(doc.data());
-   setGetAllMyChats(doc.data())
+    // console.log("Current data: ", doc.data());
+    console.log(doc.data());
+    setGetAllMyChats(doc.data())
     let  docRecievedInfoArray = Object.entries<DocumentData>(doc.data() as DocumentData).map((item,index)=>{
-      return item[1]
+    return item[1]
     })
     let getMessages = docRecievedInfoArray.map((item,index)=>{
     return item.messages })
     setGetLastMessage(getMessages as typeMessagesFromGetMessagesAndInfo[][] )
-    
+
     console.log(docRecievedInfoArray);
     setChatsUsersInfos(docRecievedInfoArray.map(item=> {
     return item.usersInfos.filter((i:typeGottenUsers)=> i.id !== user.uid)[0]
     }))
 
     });
-// getLastMessage[index].filter((item:typeMessagesFromGetMessagesAndInfo,indexNum:number)=>{
-//     if (indexNum === 0 ) {
-//     return item.messageText
-//     }
-//     })
+
+
+    return ()=> unsub()
+    }
+
+    },[message])
 
 
 
-
-
-return ()=> unsub()
-
-},[message])
-
-
-// console.log("get",chatsUsersInfos);
-// console.log(getAllMyChats);
- if (!user || Object.entries(user).length < 1) {
-    redirect("signup")
+if (typeof window !== 'undefined') {
+  if (!user || Object.entries(user).length < 1) {
+    router.push("signup")
     
   }
+}
 
 
 
@@ -74,7 +75,11 @@ return ()=> unsub()
     <section onClick={()=>{
     setUserMessagToDisplayeID(item.id)
     setClickedUser(item)
-    router.push("/chat/messages")
+    if (typeof window !== 'undefined') {
+  // Access `location` here
+  // console.log(window.location.href);
+  router.push("/chat/messages")
+}
     }} key={index} className='rounded-md pointer bg-green-400 flex items-center text-black p-2 h-[50px] w-full mt-2 '>
     <div className='w-[40px] h-[40px] rounded-full relative'>
     <Image src={item.imageURL} fill alt={"boy"} 
@@ -109,4 +114,4 @@ return ()=> unsub()
   )
 }
 
-export default Home          
+export default Chat          

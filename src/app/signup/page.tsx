@@ -1,5 +1,4 @@
 "use client"
-import ComponentsProviders from '@/components/ComponentsProviders'
 import { AppContext } from '@/context/AppProvider'
 import Link from 'next/link'
 import React, { useContext } from 'react'

@@ -15,10 +15,13 @@ const  Page = () => {
 
 
     useEffect(()=>{
+        if (typeof window !== 'undefined' && window.location) {
+    // Access location if it's available in the browser
+    // console.log(location.pathname);
     const unsub = onSnapshot(doc(db, "user-chats", user.uid), (doc) => {
       // console.log("Current data: ", doc.data());
-  //  console.log(doc.data());
-   setGetAllMyChats(doc.data())
+      //  console.log(doc.data());
+      setGetAllMyChats(doc.data())
     let  docRecievedInfoArray = Object.entries<DocumentData>(doc.data() as DocumentData).map((item,index)=>{
       return item[1]
     })
@@ -29,9 +32,10 @@ const  Page = () => {
     return item.usersInfos.filter((i:typeGottenUsers)=> i.id !== user.uid)[0]
     }))
 
-    });
-
-    return ()=> unsub()
+  });
+  
+  return ()=> unsub()
+}
 
     },[message])
 

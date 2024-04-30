@@ -81,11 +81,10 @@ const AppProvider = ({children}:{children:ReactElement}) => {
     const router  = useRouter()
     const [loadSpin,setLoadSpin] = useState<boolean>(false)
     const [user,error,loading] = useAuthState(auth)
-    console.log(loading);
-    console.log(error);
+   
     
     
-// console.log(user);
+
 
 // SIGN OUT
     const handleSignOut = async()=>{

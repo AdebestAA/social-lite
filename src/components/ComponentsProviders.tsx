@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 const ComponentsProviders = ({children}:{children:React.ReactElement}) => {
 
   const pathName = usePathname()
-  console.log(pathName);
+
   
   return (
     <div className=''>

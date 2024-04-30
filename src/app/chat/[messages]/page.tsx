@@ -19,41 +19,45 @@ const Page = () => {
 
 
 
-useEffect(()=>{
-const unsub = onSnapshot(doc(db, "user-chats", user.uid), (doc) => {
-      // console.log("Current data: ", doc.data());
-  //  console.log(doc.data());
-   setGetAllMyChats(doc.data())
+    useEffect(()=>{
+    if (typeof window !== 'undefined' && window.location) {
+    // Access location if it's available in the browser
+    // console.log(location.pathname);
+    const unsub = onSnapshot(doc(db, "user-chats", user.uid), (doc) => {
+
+    setGetAllMyChats(doc.data())
     let  docRecievedInfoArray = Object.entries<DocumentData>(doc.data() as DocumentData).map((item,index)=>{
-      return item[1]
+    return item[1]
     })
     let getMessages = docRecievedInfoArray.map((item,index)=>{
     return item.messages })
     setGetLastMessage(getMessages as typeMessagesFromGetMessagesAndInfo[][] )
-    // setChatsUsersInfos(docRecievedInfoArray.map(item=> {
-    // return item.usersInfos.filter((i:typeGottenUsers)=> i.id !== user.uid)[0]
-    // }))
+
 
     });
-console.log("this");
 
     return ()=> unsub()
-
-
-},[message])
-
-
-       useEffect(() => {
-  let  convertToArrayAndGetMessages= Object.entries(getAllMyChats).find((item, index) => {
-    
-    if (item[0] == userMessageToDisplayID + user.uid || item[0] == user.uid + userMessageToDisplayID) {
-      return item
     }
+
+
+    },[message])
+
+
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
+  // Access location if it's available in the browser
+  console.log(location.pathname);
+  let  convertToArrayAndGetMessages= Object.entries(getAllMyChats).find((item, index) => {
+
+  if (item[0] == userMessageToDisplayID + user.uid || item[0] == user.uid + userMessageToDisplayID) {
+  return item
+  }
   })as [string,typeGetMessagesAndInfos]
   const  getMessages =convertToArrayAndGetMessages[1].messages
   // console.log(getMessages);
   setMessagesToDisplay(getMessages)
-      }, [messagesToDisplay,message,getAllMyChats])
+  }
+  }, [messagesToDisplay,message,getAllMyChats])
 
 
   return (

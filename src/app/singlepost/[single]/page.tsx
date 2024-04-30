@@ -2,10 +2,10 @@
 import { AppContext } from '@/context/AppProvider'
 import { PostContext } from '@/context/PostContext'
 import { db } from '@/firebase'
-import { CommentToRecieved, TypePostToRecievd } from '@/types'
+import { TypePostToRecievd } from '@/types'
 import { collection, getDocs } from 'firebase/firestore'
 import Image from 'next/image'
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { FaHeart } from "react-icons/fa";
 
 const  Page = ({params}:{params:{single:string}}) => {
@@ -21,37 +21,42 @@ const  Page = ({params}:{params:{single:string}}) => {
 const {user} = useContext(AppContext)
 
 
-  useEffect(()=>{
-async function getAllPosts () {
-    
-    const querySnapshot = await getDocs
+    useEffect(()=>{
+
+      async function getAllPosts () {
+        if (typeof window !== 'undefined' && window.location) {
+        // Access location if it's available in the browser
+        // console.log(location.pathname);
+      
+      const querySnapshot = await getDocs
     (collection(db, "posts"));
-   
-let copyPostToDisplay:TypePostToRecievd[]  = []
+    
+    let copyPostToDisplay:TypePostToRecievd[]  = []
     querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-//         // console.log(doc.id, " => ", doc.data());
-//         console.log(doc.data());
-      copyPostToDisplay =[...copyPostToDisplay,doc.data() as TypePostToRecievd]
-         
-     
-         setPostToDisplay([...copyPostToDisplay])
-        });
+    // doc.data() is never undefined for query doc snapshots
+    //         // console.log(doc.id, " => ", doc.data());
+    //         console.log(doc.data());
+    copyPostToDisplay =[...copyPostToDisplay,doc.data() as TypePostToRecievd]
+    
+    
+    setPostToDisplay([...copyPostToDisplay])
+  });
 
-         const findPostFromPostTodisplay= postToDisplay.find(item => item.id === params.single) as TypePostToRecievd 
-setSinglePost(findPostFromPostTodisplay)
-}
-
-
- getAllPosts()
-
-
- return ()=> {
-
+    const findPostFromPostTodisplay= postToDisplay.find(item => item.id === params.single || null) as TypePostToRecievd 
+    setSinglePost(findPostFromPostTodisplay)
+  }
+  }
+  
+  
   getAllPosts()
+  
+  
+  return ()=> {
+    
+    getAllPosts()
+  
 }
-
-},[showCommentBox,postToDisplay])
+    },[showCommentBox,postToDisplay])
 
 // second useEffect
 

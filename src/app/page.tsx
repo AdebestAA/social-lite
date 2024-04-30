@@ -4,12 +4,11 @@ import { AppContext } from "@/context/AppProvider";
 import { auth, db } from "@/firebase";
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import SignedIn from "./usersignedin/layout";
-import User from "./usersignedin/page";
+
 import ComponentsProviders from "@/components/ComponentsProviders";
-import { useAuthState } from "react-firebase-hooks/auth";
+
 import { PostContext } from "@/context/PostContext";
 // import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -17,7 +16,7 @@ import { FaPlus } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa";
 import { TypePostToRecievd } from "@/types";
 import dynamic from "next/dynamic";
-import Loader from "@/components/Loader";
+
 
 
 const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
@@ -28,7 +27,7 @@ const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
 
 
 export default function Home() {
-  // const [display,setPostToDisplay] = useState([])
+  
   const {  handleSignOut,loading,user} = useContext(AppContext)
   const {postToDisplay, handleViewSinglePost,handleLikes, setPostToDisplay} = useContext(PostContext)
   const [changeState,setChangeState] = useState(true)
@@ -37,78 +36,16 @@ export default function Home() {
 // );
 
 let myDate = new Date((postToDisplay[0]?.date?.seconds  + postToDisplay[0]?.date.nanoseconds/1000000000)* 1000)
-// console.log(myDate.toLocaleDateString());
-const searchParam = useSearchParams()
-// const [user,loading,error] = useAuthState(auth)
 
-
-let id  = "acchijkrs"
-let second = "acejknsu"
   const router = useRouter()
-const handleGetUserChats = async()=>{
-
-//     const getExistingDocument = await getDoc(doc(db,"user-chats",id))
-
-//     console.log(getExistingDocument.data());
-
-// Add NEW DOC withOUT overwriting the existing ones
-// const washingtonRef = doc(db, "user-chats", id);
-// await updateDoc(washingtonRef, {
-//   anotherName:[
-//     {
-//       name:"blessing",
-//       age:"shame"
-    
-//     }
-//   ]
-// });
-
-
-// Edit existing Doc
-const frankDocRef = doc(db, "user-chats", id);
-// await setDoc(frankDocRef, {
-//     name: "Frank",
-//     favorites: { food: "Pizza", color: "Blue", subject: "recess" },
-//     age: 12
-// });
-
-// To update age and favorite color:
-await updateDoc(frankDocRef, {
-    "chris": [{
-      name:"i changes this",
-      age:"is it working"
-    }]
-});
-    
-}
-
-  const handleGet = async()=>{
-    const getExistingDocument = await getDoc(doc(db,"chats",second))
-
-if (getExistingDocument.exists()) {
-        await setDoc(doc(db, "user-chats", id), {
-       [second]:getExistingDocument?.data()?.messages, 
-    });
-}
-    console.log(getExistingDocument.data());
-    
-  }
-const children = ()=>{
-
-  return <span>show this please</span>
-}
-
-
+  
 useEffect(()=>{
 async function getAllPosts () {
     
     const querySnapshot = await getDocs(collection(db, "posts"));
-    console.log(querySnapshot);
 let copyPostToDisplay:TypePostToRecievd[]  = []
     querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-//         // console.log(doc.id, " => ", doc.data());
-//         console.log(doc.data());
+
       copyPostToDisplay =[...copyPostToDisplay,doc.data() as TypePostToRecievd]
          
      
@@ -137,27 +74,6 @@ if (loading) {
 </div>
 <h1 className="capitalize">welcome {user?.displayName}</h1>
       </header>}
-      {/* <button onClick={notify}>Click</button>
-      <ToastContainer position="top-center" 
-      bodyClassName="bg-red-500 w-full"
-     progressClassName="bg-blue-500"
-      /> */}
-      {/* <h1>Post Components</h1>
-<h4>welcome {user?.displayName}</h4>
- <button 
-className="border-2 border-black my-2 "
-onClick={()=> router.push("./home")}>go to home</button>
-<br />
-<button  onClick={handleSignOut} className="border-2 border-black ">sign out</button>
-<br />
-<button  onClick={()=> router.push("/signup") } className="border-2 border-black my-2 ">sign Up page</button>
-<br />
-<button   onClick={()=> router.push("/signin")} className="border-2 border-black ">sign in page</button>
-<br />
-<button   onClick={handleGet} className="border-2 border-black mt-2">GET</button>
-<br />
-<button   onClick={handleGetUserChats} className="border-2 border-black mt-2">userchats</button> */}
-{/* fixed elements */}
 <button onClick={()=> {
   
   if (!user || Object.entries(user).length < 1) {
