@@ -83,8 +83,8 @@ behavior:"smooth",
     {groupChatMsgToDsiplay.map((item,index)=>{
 
     return (
-    <div  key={index} ref={messageRef} className={item.userImg === user.photoURL ? 'flex flex-col justify-center items-end mt-2 ' : 'flex flex-col items-start justify-center '}>
-    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%]  bg-gray-200 py-2 rounded-md' : 'max-w-[80%] flex justify-start items-start  bg-red-500 bg-gray-200 rounded-md py-2 '}>
+    <div  key={index} ref={messageRef} className={item.userImg === user.photoURL ? 'flex flex-col justify-center items-end mt-2 ' : 'flex flex-col items-start mt-2 justify-center '}>
+    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%] bg-white py-2 rounded-md' : 'max-w-[80%] flex justify-start items-start  bg-green-200  rounded-md py-2 '}>
     <div className='relative w-[50px] h-[50px] rounded-md rounded-full '>
     <Image src={item.userImg} className='rounded-full' fill alt={item.userName} />
     </div>
@@ -123,7 +123,7 @@ behavior:"smooth",
     }
     }/>
   
-      <button className='rounded-md  text-black font-semibold my-2 bg-green-500 h-[30px] px-2'
+      <button className='rounded-md  text-black font-semibold my-2 bg-green-500 h-[30px] px-2 hover:opacity-70 focus:opacity-70'
       onClick={()=> {
       if (typeof window !== 'undefined') {
         sentGroupChatMsg(params.room)

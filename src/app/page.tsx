@@ -55,6 +55,7 @@ let copyPostToDisplay:TypePostToRecievd[]  = []
  getAllPosts()
 
 },[changeState,postToDisplay])
+console.log(user);
 
 if (loading) {
 
@@ -68,19 +69,21 @@ if (loading) {
   return (
 <ComponentsProviders>
      <main className="flex flex-col items-center pb-16">
-{ user !== null &&  <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
+{user !== null ? ( <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
 <div className="relative w-[50px] h-[50px] rounded-full">
   <Image src={user?.photoURL} alt="myPhoto" className="rounded-full" fill/>
 </div>
 <h1 className="capitalize">welcome {user?.displayName}</h1>
-      </header>}
+      </header> ): ""}
 <button onClick={()=> {
-  
-  if (!user || Object.entries(user).length < 1) {
-    router.push("signup")
-    return
+  if (typeof window !== "undefined") {
+    
+    if (user === null) {
+      router.push("signup")
+      return
+    }
+    router.push("/post")
   }
-  router.push("/post")
   
   }} className="bg-green-500 text-black font-bold fixed rounded-full w-[50px] h-[50px] left-[85%] bottom-[10%] flex items-center justify-center hover:text-gray-500 hover:opacity-90 z-40"><FaPlus className="text-2xl" /></button>
 
@@ -92,7 +95,7 @@ return (
 key={index} 
 className="border-[1px] border-gray-500 shadow-md my-2 py-2 w-[90%] flex flex-col rounded-md  max-w-[600px]"
 onClick={(e)=> {
-     if (!user) {
+     if (user === null) {
         router.push("signup")
         return
     }
@@ -120,7 +123,7 @@ onClick={(e)=> {
 {/* comments and like */}
 <div className="flex justify-between w-[90%] mx-auto">
 <p className="flex items-center gap-[2px] cursor-pointer" onClick={(e)=>{ 
-   if (!user) {
+   if (user === null) {
         router.push("signup")
         return
     }

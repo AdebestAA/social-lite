@@ -48,7 +48,7 @@ if (loading) {
   return (
     <ComponentsProviders>
     <div className='w-full justify-center h-full flex flex-col items-center mt-6 font-bold text-center'>
-      <div className='shadow-lg shadow-green-500 w-64 h-64 rounded-full relative'>
+      <div className='myImageCSS '>
       <Image src={user?.photoURL} fill alt={user?.displayName} 
         className=' rounded-full'/>
         </div>

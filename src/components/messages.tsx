@@ -24,7 +24,7 @@ console.log(userMessageToDisplayID);
  useEffect(()=>{
 
     if (chatRef.current) {
-    // chatRef.current.style.background = "red"
+   
     chatRef.current.scrollIntoView({
 behavior:"smooth",
   })

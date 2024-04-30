@@ -26,7 +26,7 @@ const InputMessageComponents = () => {
       setMessage({...message,imageMsg:file})
   }}
     />
-    <button className='rounded-md bg-black text-green-500 px-2 py-[2px] font-semibold' type='submit'>send</button>
+    <button className='rounded-md bg-black text-green-500 px-2 py-[2px] font-semibold hover:opacity-70 focus:opacity-70' type='submit'>send</button>
    </form>
  
   )

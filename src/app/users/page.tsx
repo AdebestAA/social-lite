@@ -89,7 +89,7 @@ useEffect(() => {
         setSearchUser(e.target.value)}
     } 
     />
-    <button type='submit' className='bg-green-500 text-black rounded-md mx-2 font-semibold p-[2px]'>search</button>
+    <button type='submit' className='bg-green-500 text-black rounded-md mx-2 font-semibold p-[2px] hover:opacity-70 focus:opacity-70'>search</button>
  
  </form>
  {/* user search result*/}
