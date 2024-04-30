@@ -92,7 +92,7 @@ className='border-2 border-black'
         
         return (
          <div ref={chatRef}  key={index} className={item.email === user.email ? 'flex flex-col items-end' : 'flex flex-col items-start'}>
-          <p   className='bg-white max-w-[50%]  rounded-md m-2 p-2 text-black font-semibold '>{item.messageText}</p>
+         {item.messageText && <p   className='bg-white max-w-[50%]  rounded-md m-2 p-2 text-black font-semibold '>{item.messageText}</p>}
           {item.imageMsg && <div className='relative w-[20%] h-[100px] rounded-md mx-2 rounded-md overflow-hidden'>
             <Image src={item.imageMsg} fill alt={item.messageText} />
           </div>}

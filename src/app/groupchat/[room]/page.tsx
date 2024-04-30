@@ -84,14 +84,14 @@ behavior:"smooth",
 
     return (
     <div  key={index} ref={messageRef} className={item.userImg === user.photoURL ? 'flex flex-col justify-center items-end mt-2 ' : 'flex flex-col items-start justify-center '}>
-    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%]  bg-white rounded-md' : 'max-w-[80%] flex justify-start items-start  bg-white rounded-md'}>
+    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%]  bg-gray-200 py-2 rounded-md' : 'max-w-[80%] flex justify-start items-start  bg-red-500 bg-gray-200 rounded-md py-2 '}>
     <div className='relative w-[50px] h-[50px] rounded-md rounded-full '>
     <Image src={item.userImg} className='rounded-full' fill alt={item.userName} />
     </div>
     <div className=''>
     <h4 className='capitalize pl-2 text-gray-600'>{item?.userName}</h4>
           <p   className='rounded-md p-2 text-black font-semibold '>{item.messageTxt}</p>
-               {item.messageImg && <div className='relative min-w-[20%] h-[100px] rounded-md mx-2 rounded-md overflow-hidden'>
+               {item.messageImg && <div className='relative min-w-[100px] h-[100px] rounded-md mx-2 rounded-md'>
             <Image src={item.messageImg} fill alt={item.messageTxt} />
           </div>}
           </div>
