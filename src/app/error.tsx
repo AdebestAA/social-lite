@@ -8,7 +8,9 @@ const error = () => {
     <div className='bg-black w-screen h-screen flex justify-center items-center flex-col'>
       <h1>An Error Occured</h1>
       <button className='bg-green-400 px-2 rounded-md text-black font-semibold' onClick={()=>{
-redirect("/")
+        if (typeof window !== "undefined") {
+            redirect("/")
+        }  
       }} >home page</button>
     </div>
   )
