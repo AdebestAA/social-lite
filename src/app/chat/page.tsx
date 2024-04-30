@@ -52,8 +52,8 @@ const  Chat    = () => {
 
 if (typeof window !== 'undefined') {
   if (!user || Object.entries(user).length < 1) {
-    router.push("signup")
-    
+    redirect("signup")
+    return
   }
 }
 

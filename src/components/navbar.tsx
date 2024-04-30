@@ -1,4 +1,4 @@
-import Link from 'next/link'
+"use client"
 import { usePathname } from 'next/navigation'
 import React, { useContext } from 'react'
 

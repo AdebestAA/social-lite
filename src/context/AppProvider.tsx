@@ -5,7 +5,7 @@ import { auth, db, storage } from '@/firebase';
 import {useAuthState} from "react-firebase-hooks/auth"
 import {ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"; 
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 
 // THIS CONTEXT IS FOR USER SIGN AND SIGN
@@ -88,10 +88,16 @@ const AppProvider = ({children}:{children:ReactElement}) => {
 
 // SIGN OUT
     const handleSignOut = async()=>{
+
+        console.log("jamex");
+        
     try {
     const logOut = await signOut(auth)
-    console.log(logOut);
-    router.push("/signin")
+
+   if (typeof window !== 'undefined') {
+  router.push("signup")
+    return
+  }
     
     } catch (error) {
     console.log(error);

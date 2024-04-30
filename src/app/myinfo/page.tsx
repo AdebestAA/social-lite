@@ -4,7 +4,9 @@ import { AppContext } from '@/context/AppProvider'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import React, { useContext } from 'react'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { signOut } from 'firebase/auth'
+import { auth } from '@/firebase'
 
 
 const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
@@ -25,11 +27,12 @@ const {user,handleSignOut,loading} = useContext(AppContext)
 // },[])
 
 const router = useRouter()
+
+
 if (typeof window !== 'undefined') {
-  // Access `location` here
-  // console.log(window.location.href);
+  
   if (!user || Object.entries(user).length < 1) {
-    router.push("signup")
+    redirect("signup")
     return
   }
 }
@@ -54,7 +57,22 @@ if (loading) {
         <h2>{user?.email}</h2>
  </div>
 
- <button  onClick={handleSignOut} className='capitalize bg-red-400 text-black py-[2px] px-2 rounded-lg mt-8'>log out</button>
+ <button  onClick={async()=>{
+     
+    try {
+    const logOut = await signOut(auth)
+
+   if (typeof window !== 'undefined') {
+    redirect("signup")
+  
+  }
+    
+    } catch (error) {
+    console.log(error);
+
+    }
+
+ }} className='capitalize bg-red-400 text-black py-[2px] px-2 rounded-lg mt-8'>log out</button>
     </div>
     </ComponentsProviders>
   )

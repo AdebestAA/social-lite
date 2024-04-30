@@ -1,3 +1,4 @@
+"use client"
 import { AppContext } from '@/context/AppProvider'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

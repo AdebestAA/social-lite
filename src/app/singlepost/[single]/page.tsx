@@ -128,10 +128,10 @@ return (
 )  : "no comments"}
 </div>
 
-{ showCommentBox  && <aside className='w-full fixed bottom-0 bg-gray-700 flex items-center gap-4 justify-center'>
+{ showCommentBox  && <aside className='w-full fixed bottom-0 bg-gray-700 px-4 flex items-center gap-4 justify-center'>
 <textarea name="" id=""
 placeholder='type your comment'
-className='px-2 bg-gray-800 w-4/5 h-[50px] rounded-md'
+className='px-2  bg-gray-800 w-4/5 h-[50px] rounded-md'
 onChange={(e)=> setComment(e.target.value)}
 ></textarea>
 <button className='rounded-md  text-black font-semibold my-2 bg-green-500 h-[50px] px-2' onClick={()=> handlePostYourcomment(singlePost?.id)}>POST</button>

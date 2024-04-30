@@ -78,7 +78,7 @@ behavior:"smooth",
     )   
 
     }
-    {groupChatMsgToDsiplay.length > 0 && <div    className='grow my-16 px-2'>
+    {groupChatMsgToDsiplay.length > 0 && <div    className='grow my-16 px-2 pb-16'>
 
     {groupChatMsgToDsiplay.map((item,index)=>{
 

@@ -2,7 +2,7 @@
 import Messages from '@/components/messages'
 import React, { useContext } from 'react'
 import { groupChatRooms } from '@/data'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import ComponentsProviders from '@/components/ComponentsProviders'
 import { AppContext } from '@/context/AppProvider'
 import dynamic from 'next/dynamic'
@@ -14,10 +14,8 @@ const Page= () => {
   const { loading,user} = useContext(AppContext)
 
 if (typeof window !== 'undefined') {
-  // Access `location` here
-  // console.log(window.location.href);
   if (!user || Object.entries(user).length < 1) {
-    router.push("signup")
+    redirect("/signup")
     return
   }
 }
@@ -25,9 +23,9 @@ if (typeof window !== 'undefined') {
 
 if (loading) {
 
-  return <ComponentsProviders>
+  return (<ComponentsProviders>
      < HydrationLoader/>
-  </ComponentsProviders>
+  </ComponentsProviders>)
 
 }
   
