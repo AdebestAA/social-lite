@@ -70,7 +70,7 @@ if (typeof window !== 'undefined') {
   </div> */}
 {chatsUsersInfos.length < 1 && (
   <div className='text-gray-500 font-semibold'>
-    <h1>you current don't have any active chat</h1>
+    <h1>{"you current don't have any active chat"}</h1>
   </div>
 )}
 {chatsUsersInfos.length > 0 && chatsUsersInfos.sort().map((item,index:number)=>{
