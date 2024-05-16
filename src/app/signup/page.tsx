@@ -8,7 +8,7 @@ const SignUp = () => {
 
   return (
     <div className='flex items-center justify-center font-semibold  h-screen' >
-      <section className='class-shadow bg-black w-[75%] rounded-lg p-4 text-center'>
+      <section className='class-shadow bg-black w-[35%] lg:w-[50%] md:w-[60%] xxsm:w-[85%] rounded-lg p-4 text-center'>
     <h1 className='text-green-500 font-semibold'>User sign up</h1>
     <form  onSubmit={handleSignUp}>
     <label htmlFor="name">Enter your username</label>

@@ -86,7 +86,7 @@ useEffect(()=>{
 async function getAllPosts () {
     
     const querySnapshot = await getDocs(collection(db, "posts"));
-    console.log(querySnapshot);
+    // console.log(querySnapshot);
 let copyPostToDisplay:TypePostToRecievd[]  = []
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots

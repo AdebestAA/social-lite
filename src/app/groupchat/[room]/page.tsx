@@ -61,7 +61,7 @@ behavior:"smooth",
     <section className='h-screen flex flex-col'>
 
 
-{typeof window !== 'undefined' ?  (  <header className='h-16 bg-green-500 fixed w-full top-0 mb-16 z-10 flex justify-between px-4 items-center text-gray-300 font-bold'>
+{typeof window !== 'undefined' ?  (  <header className='h-16 bg-green-500 fixed w-full top-[-1%] mb-16 z-10 flex justify-between px-4 items-center text-gray-300 font-bold'>
     {/* <div className='relative rounded-full w-[50px] h-[50px]'>
     <Image className='rounded-full' src={""} fill alt={""} />
     </div> */}
@@ -84,12 +84,12 @@ behavior:"smooth",
 
     return (
     <div  key={index} ref={messageRef} className={item.userImg === user.photoURL ? 'flex flex-col justify-center items-end mt-2 ' : 'flex flex-col items-start mt-2 justify-center '}>
-    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%] bg-white py-2 rounded-md' : 'max-w-[80%] flex justify-start items-start  bg-green-200  rounded-md py-2 '}>
-    <div className='relative w-[50px] h-[50px] rounded-md rounded-full '>
-    <Image src={item.userImg} className='rounded-full' fill alt={item.userName} />
+    <aside className={item.userImg === user.photoURL ? 'flex justify-end items-start max-w-[80%] bg-white py-2 rounded-md ' : 'max-w-[80%] flex justify-start items-start  bg-green-200  rounded-md py-2 '}>
+    <div className='relative w-[50px] h-[50px] xxsm:h-[37px] xxsm:w-[40px] rounded-md rounded-full '>
+    <Image src={item.userImg} className='rounded-full ' fill alt={item.userName} />
     </div>
-    <div className=''>
-    <h4 className='capitalize pl-2 text-gray-600'>{item?.userName}</h4>
+    <div className=' w-[85%]'>
+    <h4 className='capitalize pl-2 text-gray-600 font-semibold'>{item?.userName}</h4>
           <p   className='rounded-md p-2 text-black font-semibold '>{item.messageTxt}</p>
                {item.messageImg && <div className='relative min-w-[100px] h-[100px] rounded-md mx-2 rounded-md'>
             <Image src={item.messageImg} fill alt={item.messageTxt} />

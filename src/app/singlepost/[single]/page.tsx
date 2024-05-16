@@ -72,7 +72,9 @@ const {user} = useContext(AppContext)
 // setSinglePost(getSingleFromLocalStorage)
 //     },[showCommentBox,comment])
     return (
-      <div className='flex flex-col my-2 '>
+      <div className='flex flex-col my-2'>
+        <article className='w-[30%] mx-auto lg:w-[50%] md:w-[70%] sm:w-[80%] xsm:w-[95%]'>
+
       {/* first section */}
 <header className='flex text-black font-semibold items-center w-[90%] mx-auto space-x-2'>
 <div className="relative w-[50px] h-[50px] rounded-full ">
@@ -136,6 +138,7 @@ onChange={(e)=> setComment(e.target.value)}
 ></textarea>
 <button className='rounded-md  text-black font-semibold my-2 bg-green-500 h-[50px] px-2' onClick={()=> handlePostYourcomment(singlePost?.id)}>POST</button>
 </aside>}
+</article>
 </div>
   )
 }

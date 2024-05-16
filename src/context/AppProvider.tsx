@@ -21,7 +21,10 @@ import { redirect, useRouter } from 'next/navigation';
     handleSignOut:()=> void,
     setLoadSpin:React.Dispatch<React.SetStateAction<boolean>>,
     loadSpin:boolean,
-    loading:boolean | undefined| Error
+    loading:boolean | undefined| Error,
+    thereIsActiveUser:boolean,
+    setThereIsActiveUser:React.Dispatch<React.SetStateAction<boolean>>
+    
     }
 
     export type UserSignUpImage = {
@@ -64,7 +67,9 @@ const initailContext:ContextType = {
     handleSignOut:()=> {},
     setLoadSpin:()=>{},
     loadSpin:false,
-    loading:false
+    loading:false,
+    thereIsActiveUser:false,
+    setThereIsActiveUser:()=>{}
 
 }
 
@@ -81,6 +86,7 @@ const AppProvider = ({children}:{children:ReactElement}) => {
     const router  = useRouter()
     const [loadSpin,setLoadSpin] = useState<boolean>(false)
     const [user,error,loading] = useAuthState(auth)
+    const [thereIsActiveUser,setThereIsActiveUser] = useState<boolean>(false)
    
     
     
@@ -93,7 +99,7 @@ const AppProvider = ({children}:{children:ReactElement}) => {
         
     try {
     const logOut = await signOut(auth)
-
+setThereIsActiveUser(false)
    if (typeof window !== 'undefined') {
   router.push("signup")
     return
@@ -121,7 +127,7 @@ try {
     const passowrd = userSignIn.password 
     const res = await signInWithEmailAndPassword(auth,email,passowrd)
     console.log(res);
-    
+    setThereIsActiveUser(true)
     router.push("/")
 
 } catch (err:any) {
@@ -227,6 +233,7 @@ if (nameFound) {
     // });
   }
 )
+setThereIsActiveUser(true)
 if (typeof window !== "undefined") {
     router.push("/")
     
@@ -253,7 +260,8 @@ if (typeof window !== "undefined") {
     handleSignOut,
     setLoadSpin,
     loadSpin,
-    loading
+    loading,
+    thereIsActiveUser,setThereIsActiveUser
     }} >
     {children}
 </AppContext.Provider>

@@ -5,7 +5,7 @@ import { auth, db } from "@/firebase";
 import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 
 import ComponentsProviders from "@/components/ComponentsProviders";
 
@@ -28,7 +28,7 @@ const HydrationLoader = dynamic(()=> import("@/components/Loader"),{ssr:false})
 
 export default function Home() {
   
-  const {  handleSignOut,loading,user} = useContext(AppContext)
+  const {  handleSignOut,loading,user, thereIsActiveUser} = useContext(AppContext)
   const {postToDisplay, handleViewSinglePost,handleLikes, setPostToDisplay} = useContext(PostContext)
   const [changeState,setChangeState] = useState(true)
   
@@ -38,8 +38,17 @@ export default function Home() {
 let myDate = new Date((postToDisplay[0]?.date?.seconds  + postToDisplay[0]?.date.nanoseconds/1000000000)* 1000)
 
   const router = useRouter()
+
   
+  useLayoutEffect(()=>{
+// if (!user || user === null || Object.entries(user).length <1) {
+  
+// }
+  },[])
 useEffect(()=>{
+
+
+
 async function getAllPosts () {
     
     const querySnapshot = await getDocs(collection(db, "posts"));
@@ -55,7 +64,7 @@ let copyPostToDisplay:TypePostToRecievd[]  = []
  getAllPosts()
 
 },[changeState,postToDisplay])
-console.log(user);
+// console.log(user);
 
 if (loading) {
 
@@ -64,6 +73,13 @@ if (loading) {
   </ComponentsProviders>
 
 }
+if ( thereIsActiveUser && !user || !user?.photoURL) {
+  return <ComponentsProviders>
+     < HydrationLoader/>
+  </ComponentsProviders>
+
+}
+//  console.log(user);
   
 
   return (
@@ -71,8 +87,9 @@ if (loading) {
      <main className="flex flex-col items-center pb-16">
 {user !== null ? ( <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
 <div className="relative w-[50px] h-[50px] rounded-full">
-  <Image src={user?.photoURL} alt="myPhoto" className="rounded-full" fill/>
+  <Image src={user?.photoURL ? user.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
 </div>
+  {/* <img  src={user.photoURL} alt={user?.displayName ? user.displayName : "nothing"} /> */}
 <h1 className="capitalize">welcome {user?.displayName}</h1>
       </header> ): ""}
 <button onClick={()=> {
@@ -93,7 +110,7 @@ if (loading) {
 return (
 <article 
 key={index} 
-className="border-[1px] border-gray-500 shadow-md my-2 py-2 w-[90%] flex flex-col rounded-md  max-w-[600px]"
+className="border-[1px] border-gray-500 shadow-md my-2 py-2  flex flex-col rounded-md  w-[30%] xl:w-[40%] lg:w-[55%] md:w-[75%] xsm:w-[75%] xxsm:w-[90%]"
 onClick={(e)=> {
      if (user === null) {
         router.push("signup")
