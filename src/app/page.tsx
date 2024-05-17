@@ -87,7 +87,7 @@ if ( thereIsActiveUser && !user || !user?.photoURL) {
      <main className="flex flex-col items-center pb-16">
 {user !== null ? ( <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
 <div className="relative w-[50px] h-[50px] rounded-full">
-  <Image src={user?.photoURL ? user.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
+  <Image  priority src={user?.photoURL ? user.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
 </div>
   {/* <img  src={user.photoURL} alt={user?.displayName ? user.displayName : "nothing"} /> */}
 <h1 className="capitalize">welcome {user?.displayName}</h1>
@@ -123,7 +123,7 @@ onClick={(e)=> {
   <header className="flex justify-between px-2 w-[90%] mx-auto items-center">
     <section className="flex items-center">
   <div className="relative w-[50px] rounded-full h-[40px]">
- <Image src={post.userImg}  className="rounded-full" fill alt={post.id}/>
+ <Image src={post.userImg}  priority  className="rounded-full" fill alt={post.id}/>
 </div>
     <h2 className="w-[90%] mx-auto capitalize">{post.userDisplayName}</h2>
     </section>
@@ -134,9 +134,11 @@ onClick={(e)=> {
 
 <p  className="w-[90%] mx-auto">{post.postText}</p>
   {/* image section */}
-{post.postImg &&  <div className="relative justify-self-center w-[90%] min-h-[400px] sm:h-[500px] mx-auto rounded-md">
- <Image src={post.postImg} fill alt={post.id} className="rounded-md"/>
-</div>}
+{post.postImg &&  (
+<div className="relative justify-self-center w-[90%] min-h-[400px] sm:h-[500px] mx-auto rounded-md">
+ <Image src={post.postImg} priority fill alt={post.id} className="rounded-md"/>
+</div>
+) }
 {/* comments and like */}
 <div className="flex justify-between w-[90%] mx-auto">
 <p className="flex items-center gap-[2px] cursor-pointer" onClick={(e)=>{ 
