@@ -67,13 +67,15 @@ let copyPostToDisplay:TypePostToRecievd[]  = []
 // console.log(user);
 
 if (loading) {
-
+ console.log("this is loading");
+ 
   return <ComponentsProviders>
      < HydrationLoader/>
   </ComponentsProviders>
 
 }
 if ( thereIsActiveUser && !user || !user?.photoURL) {
+  console.log("this is active userss");
   return <ComponentsProviders>
      < HydrationLoader/>
   </ComponentsProviders>
@@ -87,7 +89,7 @@ if ( thereIsActiveUser && !user || !user?.photoURL) {
      <main className="flex flex-col items-center pb-16">
 {user !== null ? ( <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
 <div className="relative w-[50px] h-[50px] rounded-full">
-  <Image  priority src={user?.photoURL ? "https://firebasestorage.googleapis.com/v0/b/social-lite-a2fa1.appspot.com/o/running-is-one-of-the-best-ways-to-stay-fit-royalty-free-image-1036780592-1553033495.jpg?alt=media&token=626ff05e-a45e-4712-b5f1-990a3ad409c7" :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
+  <Image  priority src={user?.photoURL ? user?.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
 </div>
   {/* <img  src={user.photoURL} alt={user?.displayName ? user.displayName : "nothing"} /> */}
 <h1 className="capitalize">welcome {user?.displayName}</h1>

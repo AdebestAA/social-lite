@@ -50,12 +50,10 @@ if (loading) {
     <ComponentsProviders>
     <div className='w-full justify-center h-full flex flex-col items-center mt-6 font-bold text-center'>
       <div className='myImageCSS '>
-      <Image src={"https://firebasestorage.googleapis.com/v0/b/social-lite-a2fa1.appspot.com/o/running-is-one-of-the-best-ways-to-stay-fit-royalty-free-image-1036780592-1553033495.jpg?alt=media&token=626ff05e-a45e-4712-b5f1-990a3ad409c7"} fill alt={user?.displayName} 
+      <Image src={user?.photoURL} fill alt={user?.displayName} 
         className=' rounded-full'/>
-      {/* <Image src={user?.photoURL} fill alt={user?.displayName} 
-        className=' rounded-full'/> */}
         </div>
-                <section className='mt-8'>
+                {/* <section className='mt-8'>
         <h1 className='lowercase text-green-500'>HTML IMAGE TAG FOR IMAGE FROM firebase</h1>
         <div>
         <img src={"https://firebasestorage.googleapis.com/v0/b/social-lite-a2fa1.appspot.com/o/running-is-one-of-the-best-ways-to-stay-fit-royalty-free-image-1036780592-1553033495.jpg?alt=media&token=626ff05e-a45e-4712-b5f1-990a3ad409c7"} alt={user?.photoURL} />
@@ -69,7 +67,7 @@ if (loading) {
         className=' rounded-full'/>
         </div>
 
-        </section>
+        </section> */}
  <div className='mt-8'>
          <h1 className='capitalize'>{user?.displayName}</h1>
         <h2>{user?.email}</h2>
