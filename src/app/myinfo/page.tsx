@@ -16,6 +16,7 @@ const Page = () => {
 const {user,handleSignOut,loading} = useContext(AppContext)
 // useEffect(()=>{
 
+  console.log(user?.photoURL);
   
 //   const unsub = onSnapshot(doc(db, "user-chats", user?.uid), (doc) => {
 //     console.log("Current data: ", doc.data());
@@ -49,13 +50,15 @@ if (loading) {
     <ComponentsProviders>
     <div className='w-full justify-center h-full flex flex-col items-center mt-6 font-bold text-center'>
       <div className='myImageCSS '>
-      <Image src={user?.photoURL} fill alt={user?.displayName} 
+      <Image src={"https://firebasestorage.googleapis.com/v0/b/social-lite-a2fa1.appspot.com/o/running-is-one-of-the-best-ways-to-stay-fit-royalty-free-image-1036780592-1553033495.jpg?alt=media&token=626ff05e-a45e-4712-b5f1-990a3ad409c7"} fill alt={user?.displayName} 
         className=' rounded-full'/>
+      {/* <Image src={user?.photoURL} fill alt={user?.displayName} 
+        className=' rounded-full'/> */}
         </div>
                 <section className='mt-8'>
         <h1 className='lowercase text-green-500'>HTML IMAGE TAG FOR IMAGE FROM firebase</h1>
         <div>
-        <img src={""+user?.photoURL} alt={user?.photoURL} />
+        <img src={"https://firebasestorage.googleapis.com/v0/b/social-lite-a2fa1.appspot.com/o/running-is-one-of-the-best-ways-to-stay-fit-royalty-free-image-1036780592-1553033495.jpg?alt=media&token=626ff05e-a45e-4712-b5f1-990a3ad409c7"} alt={user?.photoURL} />
         </div>
         <h1 className='lowercase text-green-500'>image from local storage using HTML IMG TAG firebase</h1>
         <img src={"/boy.png"} alt={"myboy"} />
