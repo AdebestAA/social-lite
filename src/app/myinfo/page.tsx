@@ -51,7 +51,7 @@ if (loading) {
     <div className='w-full justify-center h-full flex flex-col items-center mt-6 font-bold text-center'>
       <div className='myImageCSS '>
       <Image src={user?.photoURL} fill alt={user?.displayName} 
-        className=' rounded-full'/>
+        className=' rounded-full object-cover'/>
         </div>
                 {/* <section className='mt-8'>
         <h1 className='lowercase text-green-500'>HTML IMAGE TAG FOR IMAGE FROM firebase</h1>

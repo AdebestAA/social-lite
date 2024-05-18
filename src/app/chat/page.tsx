@@ -87,7 +87,7 @@ if (typeof window !== 'undefined') {
     }} key={index} className='rounded-md pointer bg-green-400 flex items-center text-black p-2 h-[50px] w-full mt-2 '>
     <div className='w-[40px] h-[40px] rounded-full relative'>
     <Image src={item.imageURL} fill alt={"boy"} 
-    className=' rounded-full'/>
+    className=' rounded-full object-cover'/>
     </div>
     <div className='text-start mx-2'>
     <h1 className='capitalize text-sm font-bold'>{item.name}</h1>

@@ -80,7 +80,7 @@ className='border-2 border-black'
 
       <header className='h-16 bg-green-500 fixed w-full top-0 mb-16 z-10 flex justify-between px-4 items-center text-gray-300 font-bold'>
         <div className='relative rounded-full w-[50px] h-[50px]'>
-        <Image className='rounded-full' src={chatsUsersInfos.find(item => item.id === userMessageToDisplayID)?.imageURL as string} fill alt={chatsUsersInfos.find(item => item.id === userMessageToDisplayID)?.name as string} />
+        <Image className='rounded-full object-cover' src={chatsUsersInfos.find(item => item.id === userMessageToDisplayID)?.imageURL as string} fill alt={chatsUsersInfos.find(item => item.id === userMessageToDisplayID)?.name as string} />
         </div>
 
 
@@ -94,7 +94,7 @@ className='border-2 border-black'
          <div ref={chatRef}  key={index} className={item.email === user.email ? 'flex flex-col items-end ' : 'flex flex-col items-start'}>
          {item.messageText && <p   className='bg-white max-w-[50%]  rounded-md m-2 p-2 text-black font-semibold '>{item.messageText}</p>}
           {item.imageMsg && <div className='relative w-[20%] h-[100px] rounded-md mx-2 rounded-md overflow-hidden'>
-            <Image src={item.imageMsg} fill alt={item.messageText} />
+            <Image className='object-cover' src={item.imageMsg} fill alt={item.messageText} />
           </div>}
         </div>
           )

@@ -78,7 +78,7 @@ const {user} = useContext(AppContext)
       {/* first section */}
 <header className='flex text-black font-semibold items-center w-[90%] mx-auto space-x-2'>
 <div className="relative w-[50px] h-[50px] rounded-full ">
-<Image className='rounded-full' src={singlePost?.userImg} fill alt={singlePost?.postText} />
+<Image className='rounded-full object-cover' src={singlePost?.userImg} fill alt={singlePost?.postText} />
 </div>
 <h1 className='text-gray-200 capitalize'>{singlePost?.userDisplayName}</h1>
 
@@ -87,7 +87,7 @@ const {user} = useContext(AppContext)
 <article className='w-[90%] mx-auto'>
 <p>{singlePost?.postText}</p>
 {singlePost?.postImg && <div className="relative w-5/5 h-[400px]  min-h-[500px] sm:h-[500px] md:h-[800px] mx-auto rounded-md my-2">
-<Image className='rounded-md '  src={singlePost?.postImg} fill alt={singlePost?.postText} />
+<Image className='rounded-md object-contain'  src={singlePost?.postImg} fill alt={singlePost?.postText} />
 </div>}
 </article>
     {/* third section */}
@@ -109,7 +109,7 @@ const {user} = useContext(AppContext)
 return (
 <article key={index} className='flex border-[1px] border-gray-500 justify-between px-2 py-2 '>
 <div className="relative w-[50px] h-[50px]">
-<Image src={comment.userImg} className='rounded-full' fill alt={comment.commentText} />
+<Image src={comment.userImg} className='rounded-full object-cover' fill alt={comment.commentText} />
 </div>
 <div className='w-[60%]'>
 <h4 className='capitalize'>{comment.userName}</h4>

@@ -67,7 +67,7 @@ let copyPostToDisplay:TypePostToRecievd[]  = []
 // console.log(user);
 
 if (loading) {
- console.log("this is loading");
+//  console.log("this is loading");
  
   return <ComponentsProviders>
      < HydrationLoader/>
@@ -75,7 +75,7 @@ if (loading) {
 
 }
 if ( thereIsActiveUser && !user?.photoURL) {
-  console.log("this is active userss",thereIsActiveUser);
+  // console.log("this is active userss",thereIsActiveUser);
   return <ComponentsProviders>
      < HydrationLoader/>
   </ComponentsProviders>
@@ -89,7 +89,7 @@ if ( thereIsActiveUser && !user?.photoURL) {
      <main className="flex flex-col items-center pb-16">
 {user !== null ? ( <header className="flex justify-between items-center font-semibold bg-green-500 sticky top-0 w-full px-4 py-2  z-10">
 <div className="relative w-[50px] h-[50px] rounded-full">
-  <Image  priority src={user?.photoURL ? user?.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full" fill/>
+  <Image  priority src={user?.photoURL ? user?.photoURL :"/user-model.png" } alt="myPhoto" className="rounded-full object-cover" fill/>
 </div>
   {/* <img  src={user.photoURL} alt={user?.displayName ? user.displayName : "nothing"} /> */}
 <h1 className="capitalize">welcome {user?.displayName}</h1>
