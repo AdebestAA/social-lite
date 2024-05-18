@@ -52,6 +52,21 @@ if (loading) {
       <Image src={user?.photoURL} fill alt={user?.displayName} 
         className=' rounded-full'/>
         </div>
+                <section className='mt-8'>
+        <h1 className='lowercase text-green-500'>HTML IMAGE TAG FOR IMAGE FROM firebase</h1>
+        <div>
+        <img src={""+user?.photoURL} alt={user?.photoURL} />
+        </div>
+        <h1 className='lowercase text-green-500'>image from local storage using HTML IMG TAG firebase</h1>
+        <img src={"/boy.png"} alt={"myboy"} />
+
+        <h1 className='text-green-500'>local image using next image tag</h1>
+              <div className='myImageCSS '>
+      <Image src={"/boy.png"} fill alt={"myboy"} 
+        className=' rounded-full'/>
+        </div>
+
+        </section>
  <div className='mt-8'>
          <h1 className='capitalize'>{user?.displayName}</h1>
         <h2>{user?.email}</h2>
