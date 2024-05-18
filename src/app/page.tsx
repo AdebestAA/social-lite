@@ -74,8 +74,8 @@ if (loading) {
   </ComponentsProviders>
 
 }
-if ( thereIsActiveUser && !user || !user?.photoURL) {
-  console.log("this is active userss");
+if ( thereIsActiveUser && !user?.photoURL) {
+  console.log("this is active userss",thereIsActiveUser);
   return <ComponentsProviders>
      < HydrationLoader/>
   </ComponentsProviders>
