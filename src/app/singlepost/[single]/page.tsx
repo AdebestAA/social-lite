@@ -112,7 +112,7 @@ return (
 <Image src={comment.userImg} className='rounded-full object-cover' fill alt={comment.commentText} />
 </div>
 <div className='w-[60%]'>
-<h4 className='capitalize'>{comment.userName}</h4>
+<h4 className='capitalize font-semibold text-gray-400'>{comment.userName}</h4>
 <p>{comment.commentText}</p>
 </div>
 {/* delete and date */}

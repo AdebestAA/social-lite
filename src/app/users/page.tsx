@@ -86,7 +86,7 @@ useEffect(() => {
     placeholder='search user'
     className='border-2 border-gray-500 rounded-md text-black px-2'
     onChange={(e)=>{
-        setSearchUser(e.target.value)}
+        setSearchUser(e.target.value.toLocaleLowerCase())}
     } 
     />
     <button type='submit' className='bg-green-500 text-black rounded-md mx-2 font-semibold p-[2px] hover:opacity-70 focus:opacity-70'>search</button>

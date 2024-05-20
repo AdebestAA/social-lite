@@ -137,8 +137,8 @@ onClick={(e)=> {
 <p  className="w-[90%] mx-auto">{post.postText}</p>
   {/* image section */}
 {post.postImg &&  (
-<div className="relative justify-self-center w-[90%] min-h-[400px] sm:h-[500px] mx-auto rounded-md">
- <Image src={post.postImg} fill alt={post.id} className="rounded-md object-cover"/>
+<div className="relative justify-self-center w-[90%] max-h-[500px]  min-h-[400px] sm:h-[500px] mx-auto rounded-md">
+ <Image src={post.postImg} fill alt={post.id} className="rounded-md object-cover "/>
 </div>
 ) }
 {/* comments and like */}
