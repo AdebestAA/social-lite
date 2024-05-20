@@ -12,7 +12,7 @@ const  Page= () => {
   return (
     <div  className='flex items-center justify-center h-screen'>
     <section className='class-shadow bg-black w-[40%] lg:w-[50%] md:w-[60%] xxsm:w-[85%] rounded-lg p-4 text-center'>
- <h1 className='text-green-500 font-semibold'>sign up</h1>
+ <h1 className='text-green-500 font-semibold'>sign in</h1>
       <form  onSubmit={handleSignIn}>
     <label htmlFor="email">Enter your email</label>
     <br />
