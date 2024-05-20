@@ -206,12 +206,12 @@ if (nameFound) {
     const userRef = doc(db, "users",userCreated.uid);
     // UPDATING THE USER CREATED object
     const updateUser = await updateProfile(userCreated, {
-    displayName:userSignUp.name, 
+    displayName:userSignUp.name.toLocaleLowerCase(), 
     photoURL:imageURL
     })
     await setDoc(userRef, {
     id:userCreated.uid,
-    name:userSignUp.name,
+    name:userSignUp.name.toLocaleLowerCase(),
     email:userSignUp.email,
     imageURL:imageURL
     })
